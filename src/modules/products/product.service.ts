@@ -40,9 +40,27 @@ const findBikeById = async (id: string) => {
 
   return result;
 };
-
+// update documentation
+const updateDoc = async (id: string, updatedData: Partial<TBike>) => {
+  const result = await Bike.findByIdAndUpdate(
+    id,
+    { $set: updatedData },
+    { new: true, runValidators: true },
+  );
+  return result;
+};
+// delete documentation
+const deleteDoc = async (id: string) => {
+  const result = await Bike.findByIdAndDelete(id);
+  if (!result) {
+    throw new Error('Bike not found');
+  }
+  return result;
+};
 export const BikeService = {
   bikeInsertToDb,
   getAllBikes,
   findBikeById,
+  updateDoc,
+  deleteDoc,
 };

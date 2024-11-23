@@ -1,9 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { BikeService } from './product.service';
+import { TBike } from './product.interface';
+
 
 // create a new bike
 const createBikesInfo = async (
-  req: Request,
+  req: Request<{},{}, TBike>,
   res: Response,
   next: NextFunction,
 ) => {
@@ -19,7 +21,7 @@ const createBikesInfo = async (
       data: result,
     });
   } catch (error: any) {
-    // Pass the error to the next middleware for handling
+    // Pass the error to the next middleware
     next(error);
   }
 };
@@ -41,7 +43,7 @@ const getAllBikesByQuery = async (
       data: result,
     });
   } catch (error: any) {
-    // Pass the error to the next middleware for handling
+    // Pass the error to the next middleware
     next(error);
   }
 };
@@ -60,13 +62,47 @@ const getBikeById = async (req: Request, res: Response, next: NextFunction) => {
       data: result,
     });
   } catch (error: any) {
-    // Pass the error to the next middleware for handling
+    // Pass the error to the next middleware
     next(error);
   }
 };
-
+const docUpdatedById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<any>  => {
+  try {
+    const { productId } = req.params;
+    const updatedData = req.body;
+    const result = await BikeService.updateDoc(productId, updatedData);
+    if (!result) {
+      return res.status(404).json({
+        message: 'Bike not found',
+        success: false,
+      });
+    }
+    // Respond with success
+    res.status(200).json({
+      message: 'Bike updated successfully',
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    // Pass the error to the next middleware
+    next(error);
+  }
+};
+const deleteBikeFromDB = async(req: Request, res: Response) => {
+    try {
+      const { productId } = req.params;
+      const result = await BikeService.deleteDoc(productId);
+    } catch (error) {
+      
+    }
+};
 export const BikeControllers = {
   createBikesInfo,
   getAllBikesByQuery,
   getBikeById,
+  docUpdatedById,
 };
