@@ -1,11 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { BikeService } from './product.service';
-import { TBike } from './product.interface';
-
 
 // create a new bike
 const createBikesInfo = async (
-  req: Request<{},{}, TBike>,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -70,7 +68,7 @@ const docUpdatedById = async (
   req: Request,
   res: Response,
   next: NextFunction,
-): Promise<any>  => {
+): Promise<any> => {
   try {
     const { productId } = req.params;
     const updatedData = req.body;
@@ -92,17 +90,36 @@ const docUpdatedById = async (
     next(error);
   }
 };
-const deleteBikeFromDB = async(req: Request, res: Response) => {
-    try {
-      const { productId } = req.params;
-      const result = await BikeService.deleteDoc(productId);
-    } catch (error) {
-      
+const deleteBikeFromDB = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<any> => {
+  try {
+    const { productId } = req.params;
+    const result = await BikeService.deleteDoc(productId);
+    if (!result) {
+      return res.status(404).json({
+        message: 'Bike not found',
+        success: false,
+      });
     }
+
+    // Respond with success
+    res.status(200).json({
+      message: 'Bike deleted successfully',
+      success: true,
+      data: {},
+    });
+  } catch (error) {
+    // Pass the error to the next middleware
+    next(error);
+  }
 };
 export const BikeControllers = {
   createBikesInfo,
   getAllBikesByQuery,
   getBikeById,
   docUpdatedById,
+  deleteBikeFromDB,
 };

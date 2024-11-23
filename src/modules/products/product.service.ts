@@ -52,9 +52,6 @@ const updateDoc = async (id: string, updatedData: Partial<TBike>) => {
 // delete documentation
 const deleteDoc = async (id: string) => {
   const result = await Bike.findByIdAndDelete(id);
-  if (!result) {
-    throw new Error('Bike not found');
-  }
   return result;
 };
 export const BikeService = {
