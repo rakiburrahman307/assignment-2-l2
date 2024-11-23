@@ -8,7 +8,6 @@ router.get('/products', BikeControllers.getAllBikesByQuery);
 router.get('/products/:productId', BikeControllers.getBikeById);
 router.put('/products/:productId', BikeControllers.docUpdatedById);
 router.delete('/products/:productId',BikeControllers.deleteBikeFromDB);
-// order route 
-router.post('/orders',BikeControllers.deleteBikeFromDB);
+
 
 export default router;

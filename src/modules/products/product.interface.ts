@@ -1,5 +1,7 @@
+
 type Category = 'Mountain' | 'Road' | 'Hybrid' | 'Electric';
 
+// bike interface
 export interface TBike {
   name: string;
   brand: string;
@@ -11,3 +13,4 @@ export interface TBike {
   createdAt?: Date;
   updatedAt?: Date;
 }
+

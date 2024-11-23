@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import router from './modules/products/product.router';
 import errorHandler from './error/errorHandle';
+import orderRouter from './modules/orders/orders.router';
 const app: Application = express();
 
 app.use(express.json());
@@ -9,6 +10,7 @@ app.use(cors());
 
 // Define routes
 app.use('/api', router);
+app.use('/api', orderRouter);
 
 // home page welcome Message
 app.get('/', (req: Request, res: Response) => {
