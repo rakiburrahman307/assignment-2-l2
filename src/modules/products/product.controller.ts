@@ -1,8 +1,12 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { BikeService } from './product.service';
 
 // create a new bike
-const createBikesInfo = async (req: Request, res: Response) => {
+const createBikesInfo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     // get data from body
     const bikeData = req.body;
@@ -15,19 +19,19 @@ const createBikesInfo = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
-    res.status(500).json({
-      message: 'Failed to create bike',
-      success: false,
-      error: error?.message || 'Internal Server Error',
-    });
+    // Pass the error to the next middleware for handling
+    next(error);
   }
 };
 // get bikes by query: name, brand, category
-const getAllBikesByQuery = async (req: Request, res: Response) => {
+const getAllBikesByQuery = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     // get query from query parameter
     const { searchTerm } = req.query;
-
     const result = await BikeService.getAllBikes(searchTerm as string);
 
     // Respond with success
@@ -37,15 +41,12 @@ const getAllBikesByQuery = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
-    res.status(500).json({
-      message: 'Failed to retrieve bikes',
-      success: false,
-      error: error?.message || 'Internal Server Error',
-    });
+    // Pass the error to the next middleware for handling
+    next(error);
   }
 };
 // get a specific bike by using id
-const getBikeById = async (req: Request, res: Response) => {
+const getBikeById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // get productId from params
     const { productId } = req.params;
@@ -59,11 +60,8 @@ const getBikeById = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
-    res.status(404).json({
-      message: 'Bike not found',
-      success: false,
-      error: error?.message || 'Not Found',
-    });
+    // Pass the error to the next middleware for handling
+    next(error);
   }
 };
 

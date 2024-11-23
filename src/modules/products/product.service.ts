@@ -16,6 +16,7 @@ const bikeInsertToDb = async (bikeData: TBike) => {
   });
   return result;
 };
+
 // search  query by bike name, brand, category
 const getAllBikes = async (searchTerm: string) => {
   if (searchTerm) {

@@ -1,6 +1,7 @@
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import router from './modules/products/product.router';
+import errorHandler from './error/errorHandle';
 const app: Application = express();
 
 app.use(express.json());
@@ -16,14 +17,14 @@ app.get('/', (req: Request, res: Response) => {
     status: 200,
   });
 });
-
-// Error-Handling Middleware
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
-  res.status(500).json({
-    message: 'Internal server error',
-    status: 500,
+// if any route not found
+app.get('/*', (req: Request, res: Response) => {
+  res.status(404).json({
+    message: `Page not found: ${req?.originalUrl}`,
+    status: 404,
   });
 });
+// Error-Handling Middleware
+app.use(errorHandler);
 
 export default app;
