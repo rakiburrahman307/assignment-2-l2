@@ -22,7 +22,7 @@ const orderSchema = new Schema<TOrder>(
       min: [0, 'Number must be positive number'],
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false },
 );
 
 const Order = mongoose.model<TOrder>('orders', orderSchema);

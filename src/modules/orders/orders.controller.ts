@@ -7,7 +7,7 @@ const createProductOrder = async (
   req: Request<TOrder>,
   res: Response,
   next: NextFunction,
-): Promise<any> => {
+): Promise<void> => {
   try {
     const orderData = req.body;
     // validation by zod { product, quantity }
@@ -31,6 +31,24 @@ const createProductOrder = async (
   }
 };
 
+// get total revenue from all orders
+const getTotalRevenue = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const totalRevenue = await orderService.calculateTotalRevenue();
+    res.status(200).json({
+      message: 'Revenue calculated successfully',
+      success: true,
+      data: totalRevenue,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 export const orderControllers = {
   createProductOrder,
+  getTotalRevenue,
 };

@@ -1,10 +1,18 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import config from '../config/config';
-
-const errorHandler = (err: any, req: Request, res: Response) => {
+import { ZodError } from 'zod';
+const errorHandler = (
+  err: any,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
   res.status(statusCode).json({
-    message: err?.message || 'An unexpected error occurred',
+    message:
+      err instanceof ZodError
+        ? 'Validation error'
+        : err?.message || 'An unexpected error occurred',
     success: false,
     error: err?.error || {
       name: err?.name || 'Error',

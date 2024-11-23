@@ -4,5 +4,6 @@ const orderRouter = express.Router();
 
 // all order related routes 
 orderRouter.post('/orders', orderControllers.createProductOrder);
+orderRouter.post('/orders/revenue', orderControllers.getTotalRevenue);
 
 export default orderRouter;
