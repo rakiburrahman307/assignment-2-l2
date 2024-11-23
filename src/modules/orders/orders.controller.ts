@@ -42,7 +42,9 @@ const getTotalRevenue = async (
     res.status(200).json({
       message: 'Revenue calculated successfully',
       success: true,
-      data: totalRevenue,
+      data: {
+        totalRevenue,
+      },
     });
   } catch (error) {
     next(error);
