@@ -72,7 +72,18 @@ The **Bike Shop Management API** provides a backend for managing bikes, orders, 
 - **POST** `/api/orders`: Place an order.
 - **GET** `/api/orders/revenue`: Get total revenue from all orders.
 
+### **Setup Instructions**
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/rakiburrahman307/assignment-2-l2.git
+   ```
+
 ---
+
+- Install Dependencies
+  npm install
 
 ## Validation and Error Handling
 
@@ -91,6 +102,7 @@ Example error response:
   }
 }
 ```
+
 ## Future Enhancements
 
 - Add user authentication and authorization.
