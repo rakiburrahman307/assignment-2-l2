@@ -33,6 +33,7 @@ const validateAndUpdateBikeInfo = async (
   return bike;
 };
 
+// calculate total revenue
 const calculateTotalRevenue = async () => {
   const result = await Order.aggregate([
     {

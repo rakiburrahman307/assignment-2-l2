@@ -6,11 +6,11 @@ const orderSchema = new Schema<TOrder>(
   {
     email: {
       type: String,
-      required: [true, "This field is required"],
+      required: [true, 'This field is required'],
     },
     product: {
       type: String,
-      required: [true, "This field is required"],
+      required: [true, 'This field is required'],
     },
     quantity: {
       type: Number,

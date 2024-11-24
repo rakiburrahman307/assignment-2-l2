@@ -1,4 +1,5 @@
 # Student ID 2393 => variant 2 => SET-2
+
 # Bike Shop Management API
 
 ## Welcome! 👋
@@ -55,7 +56,6 @@ The **Bike Shop Management API** provides a backend for managing bikes, orders, 
 - **Mongoose**: ODM library for MongoDB.
 - **TypeScript**: For static typing and cleaner code.
 - **Zod**: Schema validation for requests and inputs.
-
 
 ## API Endpoints
 

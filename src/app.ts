@@ -5,10 +5,11 @@ import errorHandler from './error/errorHandle';
 import orderRouter from './modules/orders/orders.router';
 const app: Application = express();
 
+// middleware
 app.use(express.json());
 app.use(cors());
 
-// Define routes
+// define routes
 app.use('/api', router);
 app.use('/api', orderRouter);
 

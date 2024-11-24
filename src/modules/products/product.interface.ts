@@ -1,4 +1,3 @@
-
 type Category = 'Mountain' | 'Road' | 'Hybrid' | 'Electric';
 
 // bike interface
@@ -13,4 +12,3 @@ export interface TBike {
   createdAt?: Date;
   updatedAt?: Date;
 }
-

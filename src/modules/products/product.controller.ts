@@ -64,6 +64,7 @@ const getBikeById = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
+// updated doc
 const docUpdatedById = async (
   req: Request,
   res: Response,

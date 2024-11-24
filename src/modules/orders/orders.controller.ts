@@ -12,11 +12,12 @@ const createProductOrder = async (
     const orderData = req.body;
     // validation by zod { product, quantity }
     const zodValidation = validationByZodSchema.parse(orderData);
+
     await orderService.validateAndUpdateBikeInfo(
       zodValidation.product,
       zodValidation.quantity,
     );
-    // create order
+
     // Create the order
     const newOrder = await orderService.createOrder(zodValidation);
 
