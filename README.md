@@ -91,18 +91,6 @@ Example error response:
   }
 }
 ```
-
----
-
-## Additional Resources
-
-- [MongoDB Aggregation Pipeline](https://www.mongodb.com/docs/manual/aggregation/)
-- [Zod Documentation](https://zod.dev/)
-- [Express.js Official Docs](https://expressjs.com/)
-- [Mongoose Documentation](https://mongoosejs.com/)
-
----
-
 ## Future Enhancements
 
 - Add user authentication and authorization.

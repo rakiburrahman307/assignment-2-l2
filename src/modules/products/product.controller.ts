@@ -32,6 +32,7 @@ const getAllBikesByQuery = async (
   try {
     // get query from query parameter
     const { searchTerm } = req.query;
+
     const result = await BikeService.getAllBikes(searchTerm as string);
 
     // Respond with success
